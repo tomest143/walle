@@ -19,6 +19,8 @@ class Config(object):
 
     # Can be "memcached", "redis", etc.
     CACHE_TYPE = 'simple'
+
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 

@@ -71,7 +71,8 @@ class Waller(Connection):
                 'stage': wenv['stage'],
                 'sequence': wenv['sequence'],
                 'success': stdout,
-                'error': stderr,
+                'error'
+                '': stderr,
             }
             if wenv['console']:
                 emit('console', {'event': 'task:console', 'data': ws_dict}, room=wenv['task_id'])

@@ -22,21 +22,21 @@ class ProdConfig(Config):
     # 服务启动 @TODO
     # HOST 修改为与 nginx server_name 一致.
     # 后续在web hooks与通知中用到此域名.
-    HOST = 'admin.walle-web.io'
-    PORT = 5000
+    HOST = '0.0.0.0'
+    PORT = 222
     # https True, http False
     SSL = False
 
     # 数据库设置 @TODO
-    SQLALCHEMY_DATABASE_URI = 'mysql://user:password@localhost:3306/walle?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = 'mysql://super:123456@14.18.87.41:3306/walle?charset=utf8'
 
     # 本地代码检出路径（用户查询分支, 编译, 打包） #TODO
-    CODE_BASE = '/tmp/walle/codebase/'
+    CODE_BASE = '/walle/codebase/'
 
     # 日志存储路径 @TODO
     # 默认为walle-web项目下logs, 可自定义路径, 需以 / 结尾
-    # LOG_PATH = '/var/logs/walle/'
-    LOG_PATH = os.path.join(Config.PROJECT_ROOT, 'logs')
+    LOG_PATH = '/walle/logs/'
+    # LOG_PATH = os.path.join(Config.PROJECT_ROOT, 'logs')
     LOG_PATH_ERROR = os.path.join(LOG_PATH, 'error.log')
     LOG_PATH_INFO = os.path.join(LOG_PATH, 'info.log')
     LOG_FILE_MAX_BYTES = 100 * 1024 * 1024
