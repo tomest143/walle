@@ -13,4 +13,4 @@ CONFIG = DevConfig if get_debug_flag() else ProdConfig
 if len(sys.argv) > 2 and sys.argv[2] == 'test':
     CONFIG = TestConfig
 
-app = create_app(CONFIG)
+app = create_app(DevConfig)

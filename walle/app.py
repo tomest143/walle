@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """The app module, containing the app factory function."""
+from imp import reload
+
 import gevent.monkey
 gevent.monkey.patch_all()
 

@@ -22,13 +22,13 @@ class TestConfig(Config):
     # 服务启动 @TODO
     # HOST 修改为与 nginx server_name 一致.
     # 后续在web hooks与通知中用到此域名.
-    HOST = 'admin.walle-web.io'
+    HOST = '0.0.0.0'
     PORT = 5000
     # https True, http False
     SSL = False
 
     # 数据库设置 @TODO
-    SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    SQLALCHEMY_DATABASE_URI = 'mysql://super:123456@14.18.87.41:3306/walle?charset=utf8'
 
     # 本地代码检出路径（用户查询分支, 编译, 打包） #TODO
-    CODE_BASE = '/tmp/walle/codebase/'
+    CODE_BASE = '/walle/codebase/'
