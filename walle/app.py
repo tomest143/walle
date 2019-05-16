@@ -3,6 +3,7 @@
 from imp import reload
 
 import gevent.monkey
+
 gevent.monkey.patch_all()
 
 import logging
@@ -111,18 +112,23 @@ def register_blueprints(app):
     api = Api(app)
     api.add_resource(BaseAPI.Base, '/', endpoint='root')
     api.add_resource(GeneralAPI.GeneralAPI, '/api/general/<string:action>', endpoint='general')
-    api.add_resource(SpaceAPI.SpaceAPI, '/api/space/', '/api/space/<int:space_id>', '/api/space/<int:space_id>/<string:action>', endpoint='space')
+    api.add_resource(SpaceAPI.SpaceAPI, '/api/space/', '/api/space/<int:space_id>',
+                     '/api/space/<int:space_id>/<string:action>', endpoint='space')
     api.add_resource(DeployAPI.DeployAPI, '/api/deploy/', '/api/deploy/<int:task_id>', endpoint='deploy')
     api.add_resource(AccessAPI.AccessAPI, '/api/access/', '/api/access/<int:access_id>', endpoint='access')
     api.add_resource(RoleAPI.RoleAPI, '/api/role/', endpoint='role')
     api.add_resource(GroupAPI.GroupAPI, '/api/group/', '/api/group/<int:group_id>', endpoint='group')
     api.add_resource(PassportAPI.PassportAPI, '/api/passport/', '/api/passport/<string:action>', endpoint='passport')
-    api.add_resource(UserAPI.UserAPI, '/api/user/', '/api/user/<int:user_id>/<string:action>', '/api/user/<string:action>', '/api/user/<int:user_id>', endpoint='user')
+    api.add_resource(UserAPI.UserAPI, '/api/user/', '/api/user/<int:user_id>/<string:action>',
+                     '/api/user/<string:action>', '/api/user/<int:user_id>', endpoint='user')
     api.add_resource(ServerAPI.ServerAPI, '/api/server/', '/api/server/<int:id>', endpoint='server')
-    api.add_resource(ProjectAPI.ProjectAPI, '/api/project/', '/api/project/<int:project_id>', '/api/project/<int:project_id>/<string:action>', endpoint='project')
+    api.add_resource(ProjectAPI.ProjectAPI, '/api/project/', '/api/project/<int:project_id>',
+                     '/api/project/<int:project_id>/<string:action>', endpoint='project')
     api.add_resource(RepoApi.RepoAPI, '/api/repo/<string:action>/', endpoint='repo')
-    api.add_resource(TaskAPI.TaskAPI, '/api/task/', '/api/task/<int:task_id>', '/api/task/<int:task_id>/<string:action>', endpoint='task')
-    api.add_resource(EnvironmentAPI.EnvironmentAPI, '/api/environment/', '/api/environment/<int:env_id>', endpoint='environment')
+    api.add_resource(TaskAPI.TaskAPI, '/api/task/', '/api/task/<int:task_id>',
+                     '/api/task/<int:task_id>/<string:action>', endpoint='task')
+    api.add_resource(EnvironmentAPI.EnvironmentAPI, '/api/environment/', '/api/environment/<int:env_id>',
+                     endpoint='environment')
 
     return None
 
@@ -165,7 +171,7 @@ def register_logging(app):
     from logging.handlers import RotatingFileHandler
     # Formatter
     formatter = logging.Formatter(
-            '%(asctime)s %(levelname)s %(pathname)s %(lineno)s %(module)s.%(funcName)s %(message)s')
+        '%(asctime)s %(levelname)s %(pathname)s %(lineno)s %(module)s.%(funcName)s %(message)s')
 
     # log dir
     if not os.path.exists(app.config['LOG_PATH']):
@@ -192,7 +198,7 @@ def register_socketio(app):
     socketio.init_app(app, async_mode='gevent')
     socketio.on_namespace(WalleSocketIO(namespace='/walle'))
     socket_args = {"debug": app.config.get('DEBUG'), "host": app.config.get('HOST'), "port": app.config.get('PORT')}
-    socket_thread = threading.Thread(target=socketio.run, name="socket_thread", args=(app, ), kwargs=socket_args)
+    socket_thread = threading.Thread(target=socketio.run, name="socket_thread", args=(app,), kwargs=socket_args)
     socket_thread.start()
     return app
 
